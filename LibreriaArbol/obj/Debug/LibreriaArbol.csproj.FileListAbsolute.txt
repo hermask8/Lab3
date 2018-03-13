@@ -1,0 +1,6 @@
+c:\users\edwin hilario\source\repos\Lab3_Edwin_Ana\LibreriaArbol\bin\Debug\LibreriaArbol.dll
+c:\users\edwin hilario\source\repos\Lab3_Edwin_Ana\LibreriaArbol\bin\Debug\LibreriaArbol.pdb
+c:\users\edwin hilario\source\repos\Lab3_Edwin_Ana\LibreriaArbol\obj\Debug\LibreriaArbol.csprojResolveAssemblyReference.cache
+c:\users\edwin hilario\source\repos\Lab3_Edwin_Ana\LibreriaArbol\obj\Debug\LibreriaArbol.csproj.CoreCompileInputs.cache
+c:\users\edwin hilario\source\repos\Lab3_Edwin_Ana\LibreriaArbol\obj\Debug\LibreriaArbol.dll
+c:\users\edwin hilario\source\repos\Lab3_Edwin_Ana\LibreriaArbol\obj\Debug\LibreriaArbol.pdb

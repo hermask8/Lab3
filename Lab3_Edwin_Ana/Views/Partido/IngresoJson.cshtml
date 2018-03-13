@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "IngresoJson";
+}
+
+<h2>IngresoJson</h2>
+<label>Carga de modo automatico</label>
+@using (Html.BeginForm("IngresoJson", "Partido", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        <input type="file" name="archivo" />
+        <input type="submit" value="Importar" />
+    </div>
+}

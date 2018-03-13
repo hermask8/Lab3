@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+@using (Html.BeginForm("About", "Home", FormMethod.Post))
+{
+    <div>
+        <ul>
+            <li>
+                <label>Nombre <input type="text" name="ingreso" /></label>
+            </li>
+            <li>
+                <input type="submit" name="Ingresar" />
+            </li>
+        </ul>
+    </div>
+}
