@@ -1,10 +1,8 @@
 ﻿
-@{
-    ViewBag.Title = "IngresoJson";
-}
+@using Lab3_Edwin_Ana.Models;
 
-<h2>IngresoJson</h2>
-<label>Carga de modo automatico</label>
+@model IEnumerable<Partido>
+
 @using (Html.BeginForm("IngresoJson", "Partido", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div>
@@ -12,3 +10,4 @@
         <input type="submit" value="Importar" />
     </div>
 }
+

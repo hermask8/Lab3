@@ -21,7 +21,6 @@ namespace LibreriaArbol
         }
         public void PreOrden()
         {
-            listaRetorno.Clear();
             PreOrden(raiz);
         }
         public List<T> retornarLista()
@@ -195,7 +194,7 @@ namespace LibreriaArbol
                     aux = null;
                    // BalancearArbol(pivot);
                 }
-                else if (pivote.derecho == null)
+                else if (pivote.izquierdo == null)
                 {
                     Nodo<T> aux = pivote;
                     pivote = pivote.derecho;
@@ -207,6 +206,7 @@ namespace LibreriaArbol
                     Nodo<T> aux = Maximo(pivote.izquierdo);
                     pivote.data = aux.data;
                     pivote.izquierdo = EliminarConNodo(dato, pivote.izquierdo);
+                    pivote.izquierdo = null;
                     //BalancearArbol(pivot);
                 }
                
@@ -234,7 +234,8 @@ namespace LibreriaArbol
         public void eliminar(T value)
         {
             raiz = EliminarConNodo(value, raiz);
-            BalancearArbol(raiz);
+           var nuevoRaiz= BalancearArbol(raiz);
+            raiz = nuevoRaiz;
         }
 
         public Nodo<T> Maximo(Nodo<T> n)
@@ -254,37 +255,38 @@ namespace LibreriaArbol
         }
 
         Nodo<T> padre = new Nodo<T>();
-        private void Eliminar (T dato,Nodo<T> recorrer)
-        { 
-            if (recorrer!=null)
+        private void Eliminar(T dato, Nodo<T> recorrer)
+        {
+            if (dato.CompareTo(recorrer.data) == 0)
             {
-                if (recorrer.data.CompareTo(dato)==0)
+                if (recorrer.izquierdo == null && recorrer.derecho == null)
                 {
-                    if (recorrer.derecho==null & recorrer.izquierdo==null)
-                    {
-                        recorrer = null;
-                    }
-                    else if (recorrer.izquierdo==null || recorrer.derecho==null)
-                    {
-                        if (recorrer.izquierdo==null)
-                        {
-
-                        }
-                        else
-                        {
-                            
-                        }
-                    }
-                    else
-                    {
-
-                    }
+                    recorrer = null;
                 }
-                padre = recorrer;
-                Eliminar(dato,recorrer.izquierdo);
+                else if (recorrer.izquierdo != null || recorrer.derecho != null)
+                {
+                    if (recorrer.izquierdo != null)
+                    {
+                        recorrer = recorrer.izquierdo;
+                        recorrer.izquierdo = null;
+                    }
+                    else if(recorrer.derecho != null)
+                    {
+                        recorrer = recorrer.derecho;
+                        recorrer.derecho = null;
+                    }
+                    
+                }
+            }
+            else if (dato.CompareTo(recorrer.data) == -1)
+            {
+                Eliminar(dato, recorrer.izquierdo);
+            }
+            else if (dato.CompareTo(recorrer.data) == 1)
+            {
                 Eliminar(dato, recorrer.derecho);
             }
-          
         }
     }
+
 }
