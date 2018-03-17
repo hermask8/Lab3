@@ -192,6 +192,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Partido\Eliminar.cshtml" />
     <Content Include="Views\Partido\IngresoJson.cshtml" />
+    <Content Include="Views\Partido\Busqueda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

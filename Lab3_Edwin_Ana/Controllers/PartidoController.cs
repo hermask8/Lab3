@@ -15,6 +15,7 @@ namespace Lab3_Edwin_Ana.Controllers
     {
 
         List<Partido> miLista = new List<Partido>();
+        List<Partido> search = new List<Partido>();
         public ActionResult Listado()
         {
             
@@ -80,6 +81,23 @@ namespace Lab3_Edwin_Ana.Controllers
             miPartido.NoPartido = nuevo;
           //  miPartido.FechaPartido = eliminar["FechaPartido"];
             Data.GuardarPartidos.Instance.arbol.eliminar(miPartido);
+            return View();
+        }
+        public ActionResult Busqueda()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public ActionResult Busqueda(string nuevo)
+        {
+            int encontrado;
+            int dato = int.Parse(nuevo);
+            Partido miPartido = new Partido();
+            miPartido.NoPartido = dato;
+            
+            Data.GuardarPartidos.Instance.arbol.buscar(miPartido);
+            
             return View();
         }
     }

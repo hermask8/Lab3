@@ -28,6 +28,8 @@ namespace LibreriaArbol
             PreOrden();
             return listaRetorno;
         }
+        Nodo<T> buscado;
+       
         public void Insertar(T dtInfo)
         {
             Nodo<T> ntemp = new Nodo<T>();
@@ -236,6 +238,31 @@ namespace LibreriaArbol
             raiz = EliminarConNodo(value, raiz);
            var nuevoRaiz= BalancearArbol(raiz);
             raiz = nuevoRaiz;
+        }
+        public void busqueda(T dato, Nodo<T> nuevo)
+        {
+            if (nuevo != null && buscado == null)
+            {
+                if (dato.CompareTo(nuevo.data) == 0)
+                {
+                    buscado = nuevo;
+                    return;
+                }
+                if (nuevo.izquierdo != null)
+                {
+                    busqueda(dato, nuevo.izquierdo);
+                }
+                if (nuevo.derecho != null)
+                {
+                    busqueda(dato, nuevo.derecho);
+                }
+            }
+        }
+        public Nodo<T>buscar(T value)
+        {
+            buscado = null; 
+            busqueda(value, raiz);
+            return buscado;
         }
 
         public Nodo<T> Maximo(Nodo<T> n)
