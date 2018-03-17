@@ -254,7 +254,7 @@ namespace LibreriaArbol
         }
 
         Nodo<T> padre = new Nodo<T>();
-        private void Eliminar (T dato,Nodo<T> recorrer)
+        private void Eliminar2 (T dato,Nodo<T> recorrer)
         { 
             if (recorrer!=null)
             {
