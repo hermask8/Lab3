@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+<<<<<<< HEAD
 using Lab3_Edwin_Ana.Models;
+=======
+>>>>>>> master
 
 namespace Lab3_Edwin_Ana.Data
 {
@@ -24,5 +27,9 @@ namespace Lab3_Edwin_Ana.Data
         {
             arbol = new LibreriaArbol.ArbolAVL<int>();
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     }
 }
