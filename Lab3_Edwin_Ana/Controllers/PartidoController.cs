@@ -72,10 +72,9 @@ namespace Lab3_Edwin_Ana.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Eliminar(FormCollection Ingreso)
+        public ActionResult Eliminar(string Ingreso)
         {
-<<<<<<< HEAD
-            int nuevo = int.Parse(eliminar);
+            int nuevo = int.Parse(Ingreso);
             Partido miPartido = new Partido();
             miPartido.NoPartido = nuevo;
           //  miPartido.FechaPartido = eliminar["FechaPartido"];
@@ -96,18 +95,8 @@ namespace Lab3_Edwin_Ana.Controllers
             miPartido.NoPartido = dato;
             
             Data.GuardarPartidos.Instance.arbol.buscar(miPartido);
-            
-=======
-            Partido miPartido = new Partido();
-            miPartido.Estadio = Ingreso.estadio;
-            miPartido.Estadio = Ingreso.Estadio;
-            miPartido.FechaPartido = Ingreso.Fecha;
-            miPartido.Grupo = Ingreso.Grupo;
-            miPartido.Pais1 = Ingreso.Pais1;
-            miPartido.Pais2 = Ingreso.Pais2;
-            Data.GuardarPartidos.Instance.arbol.eliminar(miPartido);
 
->>>>>>> master
+
             return View();
         }
     }

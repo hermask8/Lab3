@@ -281,43 +281,6 @@ namespace LibreriaArbol
             }
         }
 
-<<<<<<< HEAD
-     
-=======
-        Nodo<T> padre = new Nodo<T>();
-        private void Eliminar2 (T dato,Nodo<T> recorrer)
-        { 
-            if (recorrer!=null)
-            {
-                if (recorrer.data.CompareTo(dato)==0)
-                {
-                    if (recorrer.derecho==null & recorrer.izquierdo==null)
-                    {
-                        recorrer = null;
-                    }
-                    else if (recorrer.izquierdo==null || recorrer.derecho==null)
-                    {
-                        if (recorrer.izquierdo==null)
-                        {
-
-                        }
-                        else
-                        {
-                            
-                        }
-                    }
-                    else
-                    {
-
-                    }
-                }
-                padre = recorrer;
-                Eliminar(dato,recorrer.izquierdo);
-                Eliminar(dato, recorrer.derecho);
-            }
-          
-        }
->>>>>>> master
     }
 
 }
