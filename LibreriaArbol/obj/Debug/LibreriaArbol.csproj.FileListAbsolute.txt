@@ -10,3 +10,9 @@ C:\Users\Ana Gabriel Morales\Desktop\Labs\Lab3\LibreriaArbol\obj\Debug\LibreriaA
 C:\Users\Ana Gabriel Morales\Desktop\Labs\Lab3\LibreriaArbol\obj\Debug\LibreriaArbol.csproj.CoreCompileInputs.cache
 C:\Users\Ana Gabriel Morales\Desktop\Labs\Lab3\LibreriaArbol\obj\Debug\LibreriaArbol.dll
 C:\Users\Ana Gabriel Morales\Desktop\Labs\Lab3\LibreriaArbol\obj\Debug\LibreriaArbol.pdb
+C:\Users\Edwin Hilario\Documents\lab3\Lab3\LibreriaArbol\bin\Debug\LibreriaArbol.dll
+C:\Users\Edwin Hilario\Documents\lab3\Lab3\LibreriaArbol\bin\Debug\LibreriaArbol.pdb
+C:\Users\Edwin Hilario\Documents\lab3\Lab3\LibreriaArbol\obj\Debug\LibreriaArbol.csprojResolveAssemblyReference.cache
+C:\Users\Edwin Hilario\Documents\lab3\Lab3\LibreriaArbol\obj\Debug\LibreriaArbol.csproj.CoreCompileInputs.cache
+C:\Users\Edwin Hilario\Documents\lab3\Lab3\LibreriaArbol\obj\Debug\LibreriaArbol.dll
+C:\Users\Edwin Hilario\Documents\lab3\Lab3\LibreriaArbol\obj\Debug\LibreriaArbol.pdb

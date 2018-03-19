@@ -18,8 +18,7 @@ namespace Lab3_Edwin_Ana.Controllers
         List<Partido> search = new List<Partido>();
         public ActionResult Listado()
         {
-            
-            
+            miLista = Data.GuardarPartidos.Instance.arbol.retornarLista();
             return View(miLista);
         }
 
@@ -54,12 +53,11 @@ namespace Lab3_Edwin_Ana.Controllers
             var path = retornoArch.File.ReadAllText(archivo.FileName);
             var deserealizar = JsonConvert.DeserializeObject<Partido2>(path);
 
-            
-            //miLista.Clear();
 
+            //miLista.Clear();
             PreOrden(deserealizar);
             miLista = Data.GuardarPartidos.Instance.arbol.retornarLista();
-            return View(miLista);
+            return View("Listado", miLista);
 
         }
 
