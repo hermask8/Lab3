@@ -194,6 +194,7 @@
     <Content Include="Views\Partido\IngresoJson.cshtml" />
     <Content Include="Views\Partido\Busqueda.cshtml" />
     <Content Include="Views\Partido\Listado.cshtml" />
+    <Content Include="Views\Partido\ListadoBuscar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

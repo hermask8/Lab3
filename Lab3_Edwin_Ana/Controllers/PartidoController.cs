@@ -8,6 +8,7 @@ using System.IO;
 using retornoArch = System.IO;
 using Newtonsoft.Json;
 using LibreriaArbol;
+using System.Net;
 
 namespace Lab3_Edwin_Ana.Controllers
 {
@@ -15,50 +16,59 @@ namespace Lab3_Edwin_Ana.Controllers
     {
 
         List<Partido> miLista = new List<Partido>();
+        List<Partido> miLista2 = new List<Partido>();
         List<Partido> search = new List<Partido>();
         public ActionResult Listado()
         {
-            miLista = Data.GuardarPartidos.Instance.arbol.retornarLista();
-            return View(miLista);
+            return View();
         }
-
+        public ActionResult ListadoBuscar()
+        {
+            return View();
+        }
         public ActionResult IngresoJson()
         {
             return View();
         }
-        public void PreOrden(Partido2 aux)
-        {
-            if (aux != null)
-            {
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo1);
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo2);
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo3);
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo4);
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo5);
-                /*Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo6);
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo7);
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo8);
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo9);
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo10);
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo11);
-                Data.GuardarPartidos.Instance.arbol.Insertar(aux.nodo12);*/
-                // PreOrden(aux.izquierdo);
-                // PreOrden(aux.derecho);
-            }
-        }
+        
         [HttpPost]
         public ActionResult IngresoJson(HttpPostedFileBase archivo)
         {
+            try
+            {
+                // TODO: Add insert logic here
+                if (Path.GetFileName(archivo.FileName).EndsWith(".json"))
+                {
+                    archivo.SaveAs(Server.MapPath("~/JSONFiles" + Path.GetFileName(archivo.FileName)));
+                    StreamReader sr = new StreamReader(Server.MapPath("~/JSONFiles" + Path.GetFileName(archivo.FileName)));
+                    string data = sr.ReadToEnd();
+                    List<Partido> partidos = new List<Partido>();
+                    string[] g;
+                    char[] separators = { '{', '}' };
+                    g = data.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                    for (int i = 1; i < g.Length; i++)
+                    {
+                        string a = "{" + g[i] + "}";
+                        partidos.Add(JsonConvert.DeserializeObject<Partido>(a));
+                        i++;
+                    }
 
-            var path = retornoArch.File.ReadAllText(archivo.FileName);
-            var deserealizar = JsonConvert.DeserializeObject<Partido2>(path);
-
-
-            //miLista.Clear();
-            PreOrden(deserealizar);
-            miLista = Data.GuardarPartidos.Instance.arbol.retornarLista();
-            return View("Listado", miLista);
-
+                    foreach (var item in partidos)
+                    {
+                        Data.GuardarPartidos.Instance.arbol.Insertar(item);
+                    }
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                miLista = Data.GuardarPartidos.Instance.arbol.retornarLista();
+                return View("Listado",miLista);
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         public ActionResult IngresoManual()
@@ -76,10 +86,22 @@ namespace Lab3_Edwin_Ana.Controllers
         {
             int nuevo = int.Parse(Ingreso);
             Partido miPartido = new Partido();
-            miPartido.NoPartido = nuevo;
+            miPartido.noPartido = nuevo;
           //  miPartido.FechaPartido = eliminar["FechaPartido"];
             Data.GuardarPartidos.Instance.arbol.eliminar(miPartido);
-            return View();
+            miLista.Clear();
+            miLista = Data.GuardarPartidos.Instance.arbol.retornarLista();
+            Partido mi = new Partido();
+            var repetido = mi;
+            foreach (var item in miLista)
+            {
+                if (item!=mi)
+                {
+                    miLista2.Add(item);
+                }
+                repetido = item;
+            }
+            return View("Listado",miLista2);
         }
         public ActionResult Busqueda()
         {
@@ -92,12 +114,12 @@ namespace Lab3_Edwin_Ana.Controllers
             int encontrado;
             int dato = int.Parse(nuevo);
             Partido miPartido = new Partido();
-            miPartido.NoPartido = dato;
+            miPartido.noPartido = dato;
             
-            Data.GuardarPartidos.Instance.arbol.buscar(miPartido);
-
-
-            return View();
+           var resultado = Data.GuardarPartidos.Instance.arbol.buscar(miPartido);
+            miLista.Clear();
+            miLista.Add(resultado);
+            return View("ListadoBuscar",miLista);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace LibreriaArbol
         }
         public void PreOrden()
         {
+            listaRetorno.Clear();
             PreOrden(raiz);
         }
         public List<T> retornarLista()
@@ -28,7 +29,7 @@ namespace LibreriaArbol
             PreOrden();
             return listaRetorno;
         }
-        Nodo<T> buscado;
+        Nodo<T> buscado = new Nodo<T>();
        
         public void Insertar(T dtInfo)
         {
@@ -172,21 +173,16 @@ namespace LibreriaArbol
             {
                 return null;
             }
-            if (dato.CompareTo(pivote.data) < 0)
+            
+             if (dato.CompareTo(pivote.data)==0)
             {
-                pivote.izquierdo = EliminarConNodo(dato, pivote.izquierdo);
-            }
-            else if (dato.CompareTo(pivote.data) > 0)
-            {
-                pivote.derecho = EliminarConNodo(dato, pivote.derecho);
-            }
-
-            else
-            {
-                if (pivote.derecho == null && pivote.izquierdo == null)
+                if (pivote == raiz)
+                {
+                    EliminarRaiz(dato, pivote);
+                }
+                else if (pivote.derecho == null && pivote.izquierdo == null)
                 {
                     pivote = null;
-                    //BalancearArbol(pivot);
                     return pivote;
                 }
                 else if (pivote.derecho == null)
@@ -194,30 +190,89 @@ namespace LibreriaArbol
                     Nodo<T> aux = pivote;
                     pivote = pivote.izquierdo;
                     aux = null;
-                   // BalancearArbol(pivot);
                 }
-                else if (pivote.izquierdo == null)
+                else if (pivote.derecho == null)
                 {
                     Nodo<T> aux = pivote;
                     pivote = pivote.derecho;
                     aux = null;
-                    //BalancearArbol(pivot);
                 }
                 else
                 {
                     Nodo<T> aux = Maximo(pivote.izquierdo);
                     pivote.data = aux.data;
-                    pivote.izquierdo = EliminarConNodo(dato, pivote.izquierdo);
-                    pivote.izquierdo = null;
-                    //BalancearArbol(pivot);
+                    pivote.derecho = EliminarConNodo(dato, pivote.izquierdo);
                 }
-               
+
             }
+            else if (dato.CompareTo(pivote.data) == -1)
+            {
+                pivote.izquierdo = EliminarConNodo(dato, pivote.izquierdo);
+            }
+            else if (dato.CompareTo(pivote.data) == 1)
+            {
+                pivote.derecho = EliminarConNodo(dato, pivote.derecho);
+            }
+
+          
             
             return pivote;
         }
 
- 
+        private void EliminarRaiz(T dato, Nodo<T> aux)
+        {
+            if (aux != null)
+            {
+                if (dato.CompareTo(aux.data) == -1)
+                {
+                    EliminarRaiz(dato, aux.izquierdo);
+                }
+                else
+                {
+                    if (dato.CompareTo(aux.data) == 1)
+                    {
+                        EliminarRaiz(dato, aux.derecho);
+                    }
+                    else
+                    {
+                        Nodo<T> toDeleteNode = aux;
+                        if (toDeleteNode.derecho == null)
+                        {
+                            aux = toDeleteNode.izquierdo;
+                        }
+                        else
+                        {
+                            if (toDeleteNode.izquierdo == null)
+                            {
+                                aux = toDeleteNode.derecho;
+                            }
+                            else
+                            {
+                                Nodo<T> pivote = null;
+                                Nodo<T> aux2 = aux.izquierdo;
+                                bool mark = false;
+                                while (aux2.derecho != null)
+                                {
+                                    pivote = aux2;
+                                    aux2 = aux2.derecho;
+                                    mark = true;
+                                }
+                                aux.data = aux2.data;
+                                toDeleteNode = aux;
+                                if (mark == true)
+                                {
+                                    pivote.derecho = aux2.izquierdo;
+                                }
+                                else
+                                {
+                                    aux.izquierdo = aux.izquierdo;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         public Nodo<T> FindMin(Nodo<T> nodo)
         {
             if (nodo==null)
@@ -258,11 +313,11 @@ namespace LibreriaArbol
                 }
             }
         }
-        public Nodo<T>buscar(T value)
+        public T buscar(T value)
         {
             buscado = null; 
             busqueda(value, raiz);
-            return buscado;
+            return buscado.data;
         }
 
         public Nodo<T> Maximo(Nodo<T> n)
