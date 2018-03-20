@@ -20,7 +20,7 @@ namespace Lab3_Edwin_Ana.Controllers
         List<Partido> search = new List<Partido>();
         public ActionResult Listado()
         {
-            return View();
+            return View(miLista2);
         }
         public ActionResult ListadoBuscar()
         {
@@ -63,6 +63,16 @@ namespace Lab3_Edwin_Ana.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 miLista = Data.GuardarPartidos.Instance.arbol.retornarLista();
+                Partido mi = new Partido();
+                var repetido = mi;
+                foreach (var item in miLista)
+                {
+                    if (item != mi)
+                    {
+                        miLista2.Add(item);
+                    }
+                    repetido = item;
+                }
                 return View("Listado",miLista);
             }
             catch
