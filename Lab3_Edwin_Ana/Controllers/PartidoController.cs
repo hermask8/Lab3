@@ -15,9 +15,11 @@ namespace Lab3_Edwin_Ana.Controllers
     public class PartidoController : Controller
     {
 
+        //StreamWriter escribir = new StreamWriter("Vitacora.txt");
         List<Partido> miLista = new List<Partido>();
         List<Partido> miLista2 = new List<Partido>();
         List<Partido> search = new List<Partido>();
+       static List<string> ingresoVitacora = new List<string>();
         public ActionResult Listado()
         {
             miLista.Clear();
@@ -68,8 +70,11 @@ namespace Lab3_Edwin_Ana.Controllers
 
                     foreach (var item in partidos)
                     {
+                        var escrito = ("INSERTAR: " + "Estadio: " + item.Estadio + ", " + "Numero de partido:" + item.noPartido + ", " + "Fecha del partido: " + item.FechaPartido + ", " + "Grupo: " + item.Grupo + ", " + "Pais1" + item.Pais1 + ", " + "Pais 2" + item.Pais2);
+                        ingresoVitacora.Add(escrito);
                         Data.GuardarPartidos.Instance.arbol.Insertar(item);
                     }
+                    //escribir.Close();
                 }
                 else
                 {
@@ -107,7 +112,10 @@ namespace Lab3_Edwin_Ana.Controllers
             int nuevo = int.Parse(Ingreso);
             Partido miPartido = new Partido();
             miPartido.noPartido = nuevo;
-          //  miPartido.FechaPartido = eliminar["FechaPartido"];
+            //  miPartido.FechaPartido = eliminar["FechaPartido"];
+            var eliminarvitacora = Data.GuardarPartidos.Instance.arbol.buscar(miPartido);
+            var escrito = ("Eliminar: " + "Estadio: " + eliminarvitacora.Estadio + ", " + "Numero de partido:" + eliminarvitacora.noPartido + ", " + "Fecha del partido: " + eliminarvitacora.FechaPartido + ", " + "Grupo: " + eliminarvitacora.Grupo + ", " + "Pais1: " + eliminarvitacora.Pais1 + ", " + "Pais 2: " + eliminarvitacora.Pais2);
+            ingresoVitacora.Add(escrito);
             Data.GuardarPartidos.Instance.arbol.eliminar(miPartido);
             miLista.Clear();
             miLista = Data.GuardarPartidos.Instance.arbol.retornarLista();
@@ -158,8 +166,18 @@ namespace Lab3_Edwin_Ana.Controllers
                 Pais1 = nuevo["Pais1"],
                 Pais2 = nuevo["Pais2"]
             };
+            var escrito =("INGRESO: " + "Estadio: "+ nuevo["Estadio"] +", "+ "Numero de partido:" + nuevo["noPartido"]+ ", " + "Fecha del partido: " + nuevo["FechaPartido"] + ", " + "Grupo: " + nuevo["Grupo"]+ ", " + "Pais1: " + nuevo["Pais1"] + ", " + "Pais 2: " + nuevo["Pais2"]);
+            ingresoVitacora.Add(escrito);
             Data.GuardarPartidos.Instance.arbol.Insertar(partido);
+            //escribir.Close();
             return View();
+        }
+
+        public ActionResult Vitacora()
+        {
+            //hacertxt miArch = new hacertxt(ingresoVitacora);
+           
+            return View(ingresoVitacora);
         }
     }
 }

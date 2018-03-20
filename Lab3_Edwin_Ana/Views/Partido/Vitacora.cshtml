@@ -1,0 +1,24 @@
+﻿@model IEnumerable<string>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label>Ingresos y eliminaciones de vitacora</label>
+        </th>
+      
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item)
+        </td>
+        
+    </tr>
+}
+
+</table>
