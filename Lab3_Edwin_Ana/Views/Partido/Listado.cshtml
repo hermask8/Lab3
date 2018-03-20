@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Lab3_Edwin_Ana.Models.Partido>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo partido", "IngresoManual")
 </p>
 <table class="table">
     <tr>
@@ -47,9 +47,8 @@
             @Html.DisplayFor(modelItem => item.Estadio)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            
+            @Html.ActionLink("Delete", "Eliminar", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

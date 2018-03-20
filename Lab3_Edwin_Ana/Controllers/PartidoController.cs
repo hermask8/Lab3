@@ -20,6 +20,19 @@ namespace Lab3_Edwin_Ana.Controllers
         List<Partido> search = new List<Partido>();
         public ActionResult Listado()
         {
+            miLista.Clear();
+            miLista2.Clear();
+            miLista = Data.GuardarPartidos.Instance.arbol.retornarLista();
+            Partido mi = new Partido();
+            var repetido = mi;
+            foreach (var item in miLista)
+            {
+                if (item != mi)
+                {
+                    miLista2.Add(item);
+                }
+                repetido = item;
+            }
             return View(miLista2);
         }
         public ActionResult ListadoBuscar()
@@ -62,6 +75,7 @@ namespace Lab3_Edwin_Ana.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+                miLista.Clear();
                 miLista = Data.GuardarPartidos.Instance.arbol.retornarLista();
                 Partido mi = new Partido();
                 var repetido = mi;
@@ -80,11 +94,7 @@ namespace Lab3_Edwin_Ana.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
-
-        public ActionResult IngresoManual()
-        {
-            return View();
-        }
+        
 
         public ActionResult Eliminar()
         {
@@ -130,6 +140,26 @@ namespace Lab3_Edwin_Ana.Controllers
             miLista.Clear();
             miLista.Add(resultado);
             return View("ListadoBuscar",miLista);
+        }
+
+        public ActionResult IngresoManual()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult IngresoManual(FormCollection nuevo)
+        {
+            Partido partido = new Partido
+            {
+                Estadio = nuevo["Estadio"],
+                noPartido =int.Parse(nuevo["noPartido"]),
+                FechaPartido = nuevo["FechaPartido"],
+                Grupo = nuevo["Grupo"],
+                Pais1 = nuevo["Pais1"],
+                Pais2 = nuevo["Pais2"]
+            };
+            Data.GuardarPartidos.Instance.arbol.Insertar(partido);
+            return View();
         }
     }
 }

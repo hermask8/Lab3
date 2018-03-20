@@ -315,9 +315,15 @@ namespace LibreriaArbol
         }
         public T buscar(T value)
         {
-            buscado = null; 
-            busqueda(value, raiz);
-            return buscado.data;
+            if (value != null)
+            {
+
+                buscado = null;
+                busqueda(value, raiz);
+                return buscado.data;
+            }
+            else
+               return value;
         }
 
         public Nodo<T> Maximo(Nodo<T> n)

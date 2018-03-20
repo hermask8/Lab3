@@ -6,6 +6,7 @@
 @using (Html.BeginForm("IngresoJson", "Partido", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div>
+        <label>seleccione el json que desee</label>
         <input type="file" name="archivo" />
         <input type="submit" value="Importar" />
     </div>

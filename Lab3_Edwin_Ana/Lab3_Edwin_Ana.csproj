@@ -195,6 +195,7 @@
     <Content Include="Views\Partido\Busqueda.cshtml" />
     <Content Include="Views\Partido\Listado.cshtml" />
     <Content Include="Views\Partido\ListadoBuscar.cshtml" />
+    <Content Include="Views\Partido\IngresoManual.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
